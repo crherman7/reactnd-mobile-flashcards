@@ -12,23 +12,30 @@ class Deck extends Component {
   };
 
   render() {
-    const { title, numberOfCards } = this.props;
+    // const { title, numberOfCards } = this.props;
+    const title = "Ancient Aliens";
+    const numberOfCards = "20";
+
     return (
       <View style={styles.container}>
-        <Text style={styles.titleFont}>{title}</Text>
-        <Text style={styles.cardNumberFont}>{numberOfCards} cards</Text>
-        <TouchableOpacity
-          style={[styles.deckButton, styles.buttonMargin]}
-          onPress={this.addCardClick}
-        >
-          <Text>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.deckButton}
-          onPress={this.startQuizClick}
-        >
-          <Text>Start Quiz!</Text>
-        </TouchableOpacity>
+        <View style={styles.textContainer}>
+          <Text style={styles.titleFont}>{title}</Text>
+          <Text style={styles.cardNumberFont}>{numberOfCards} cards</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.deckButton, styles.buttonMargin]}
+            onPress={this.addCardClick}
+          >
+            <Text>Add Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deckButton}
+            onPress={this.startQuizClick}
+          >
+            <Text>Start Quiz!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

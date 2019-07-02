@@ -8,12 +8,24 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   addDeckButton: {
-    marginTop: 30,
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
     borderRadius: 20,
     width: "50%"
+  },
+  listContainer: {
+    height: "70%",
+    width: "100%"
+  },
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1
+  },
+  buttonContainer: {
+    height: 100,
+    justifyContent: "center"
   }
 });
 

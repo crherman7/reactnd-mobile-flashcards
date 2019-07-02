@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
@@ -12,17 +12,30 @@ const styles = StyleSheet({
     fontWeight: "bold"
   },
   cardNumberfont: {
-      fontSize: 16, 
+    fontSize: 16
   },
   deckButton: {
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
     borderRadius: 20,
-    width: "50%"
+    width: 200
   },
   buttonMargin: {
-      marginTop: 40,
+    marginTop: 40
+  },
+  textContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 50
+  },
+  buttonContainer: {
+    marginTop: 40,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 150
   }
 });
 
