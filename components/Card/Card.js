@@ -28,7 +28,7 @@ class Card extends Component {
             <TouchableOpacity
               onPress={() => this.setState({ questionView: !questionView })}
             >
-              <Text>Answer</Text>
+              <Text>Show Answer</Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -37,7 +37,7 @@ class Card extends Component {
             <TouchableOpacity
               onPress={() => this.setState({ questionView: !questionView })}
             >
-              <Text>Question</Text>
+              <Text>Show Question</Text>
             </TouchableOpacity>
           </View>
         )}

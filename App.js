@@ -10,10 +10,15 @@ import NewDeck from "./components/NewDeck/NewDeck";
 import Deck from "./components/Deck/Deck";
 import NewCard from "./components/NewCard/NewCard";
 import Quiz from "./components/Quiz/Quiz";
+import { setLocalNotification } from "./utils/helpers";
 
 const store = createStore(reducer, middleware);
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -29,19 +34,34 @@ export default class App extends React.Component {
 const Navigator = createStackNavigator(
   {
     DeckList: {
-      screen: DeckList
+      screen: DeckList,
+      navigationOptions: () => ({
+        title: "Flashcard Decks"
+      })
     },
     NewDeck: {
-      screen: NewDeck
+      screen: NewDeck,
+      navigationOptions: () => ({
+        title: "New Deck"
+      })
     },
     Deck: {
-      screen: Deck
+      screen: Deck,
+      navigationOptions: () => ({
+        title: "Deck"
+      })
     },
     NewCard: {
-      screen: NewCard
+      screen: NewCard,
+      navigationOptions: () => ({
+        title: "New Flashcard"
+      })
     },
     Quiz: {
-      screen: Quiz
+      screen: Quiz,
+      navigationOptions: () => ({
+        title: "Quiz"
+      })
     }
   },
   {

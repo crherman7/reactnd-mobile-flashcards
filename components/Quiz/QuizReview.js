@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./QuizReviewStyle";
+import { clearNotification, setLocalNotification } from "../../utils/helpers";
 
 class QuizReview extends Component {
+  componentDidMount = () => {
+    clearNotification().then(setLocalNotification);
+  };
+
   render() {
     const { score, id, navigate } = this.props;
 

@@ -11,11 +11,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
-    borderRadius: 20,
-    width: "50%"
+    width: "100%"
   },
   listContainer: {
-    width: "100%"
+    width: "100%",
   },
   center: {
     alignItems: "center",
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     flexGrow: 1
   },
   buttonContainer: {
-    height: 100,
+    width: "100%",
     justifyContent: "center"
   }
 });

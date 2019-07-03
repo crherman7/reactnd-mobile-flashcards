@@ -47,7 +47,7 @@ class NewCard extends Component {
           style={[styles.submitButton, styles.contentMargin]}
           onPress={this.submitClicked}
         >
-          <Text>Submit</Text>
+          <Text>Create Card</Text>
         </TouchableOpacity>
       </View>
     );

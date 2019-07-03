@@ -20,7 +20,7 @@ class Deck extends Component {
       this.state.fadeAnim, // The animated value to drive
       {
         toValue: 1, // Animate to opacity: 1 (opaque)
-        duration: 5000 // Make it take a while
+        duration: 3000 // Make it take a while
       }
     ).start(); // Starts the animation
   }
@@ -42,16 +42,20 @@ class Deck extends Component {
               navigate("NewCard", { id });
             }}
           >
-            <Text>Add Card</Text>
+            <Text>Add Flashcard</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.deckButton}
-            onPress={() => {
-              navigate("Quiz", { id, refresh: false });
-            }}
-          >
-            <Text>Start Quiz!</Text>
-          </TouchableOpacity>
+          {numberOfCards > 0 ? (
+            <TouchableOpacity
+              style={styles.deckButton}
+              onPress={() => {
+                navigate("Quiz", { id, refresh: false });
+              }}
+            >
+              <Text>Start Quiz!</Text>
+            </TouchableOpacity>
+          ) : (
+            <Text>Add a flashcard to be able to start quiz!</Text>
+          )}
         </View>
       </Animated.View>
     );
@@ -65,7 +69,7 @@ mapStateToProps = ({ decks }, props) => {
   return {
     id,
     navigate,
-    numberOfCards: decks[id].questions.length
+    numberOfCards: decks[id] && decks[id].questions.length
   };
 };
 
