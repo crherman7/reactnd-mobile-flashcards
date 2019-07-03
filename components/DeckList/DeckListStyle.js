@@ -15,13 +15,12 @@ const styles = StyleSheet.create({
     width: "50%"
   },
   listContainer: {
-    height: "70%",
     width: "100%"
   },
   center: {
     alignItems: "center",
-    justifyContent: "center",
-    flex: 1
+    justifyContent: "flex-start",
+    flexGrow: 1
   },
   buttonContainer: {
     height: 100,

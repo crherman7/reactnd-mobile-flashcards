@@ -16,7 +16,9 @@ class NewDeck extends Component {
     const { navigate } = this.props.navigation;
 
     dispatch(handleAddDeck(deckTitle));
-    navigate("DeckList");
+    // setTimeout(function() {
+    navigate("Deck", { id: deckTitle });
+    // }, 1000);
   };
 
   render() {

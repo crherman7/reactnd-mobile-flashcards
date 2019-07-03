@@ -1,18 +1,36 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, AsyncStorage } from "react-native";
+import {
+  Animated,
+  View,
+  Text,
+  TouchableOpacity,
+  AsyncStorage
+} from "react-native";
 import styles from "./DeckStyle";
 import { connect } from "react-redux";
 
 class Deck extends Component {
-  startQuizClick = () => {
-    alert("Start quiz button clicked!");
+  state = {
+    fadeAnim: new Animated.Value(0)
   };
+
+  componentDidMount() {
+    Animated.timing(
+      // Animate over time
+      this.state.fadeAnim, // The animated value to drive
+      {
+        toValue: 1, // Animate to opacity: 1 (opaque)
+        duration: 5000 // Make it take a while
+      }
+    ).start(); // Starts the animation
+  }
 
   render() {
     const { id, numberOfCards, navigate } = this.props;
+    let { fadeAnim } = this.state;
 
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
         <View style={styles.textContainer}>
           <Text style={styles.titleFont}>{id}</Text>
           <Text style={styles.cardNumberFont}>{numberOfCards} cards</Text>
@@ -35,7 +53,7 @@ class Deck extends Component {
             <Text>Start Quiz!</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     );
   }
 }
