@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./NewDeckStyle";
+import { connect } from "react-redux";
+import { handleAddDeck } from "../../actions/decks";
 
 class NewDeck extends Component {
   state = {
@@ -10,8 +12,11 @@ class NewDeck extends Component {
 
   submitClick = () => {
     const { deckTitle } = this.state;
+    const { dispatch } = this.props;
+    const { navigate } = this.props.navigation;
 
-    alert(`Deck Title: ${deckTitle}`);
+    dispatch(handleAddDeck(deckTitle));
+    navigate("DeckList");
   };
 
   render() {
@@ -36,4 +41,4 @@ class NewDeck extends Component {
   }
 }
 
-export default NewDeck;
+export default connect()(NewDeck);

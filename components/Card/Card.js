@@ -9,19 +9,17 @@ class Card extends Component {
   };
 
   correctButtonClicked = () => {
-    alert("Correct button clicked!");
+    this.props.correct();
   };
 
   incorrectButtonClicked = () => {
-    alert("Incorrect button clicked!");
+    this.props.iterate();
   };
 
   render() {
-    // const { question, answer } = this.props;
+    const { question, answer, cardsRemaining } = this.props;
     const { questionView } = this.state;
 
-    const question = "What is your name?";
-    const answer = "Chris";
     return (
       <View style={styles.container}>
         {questionView ? (
@@ -56,6 +54,7 @@ class Card extends Component {
           >
             <Text>Incorrect</Text>
           </TouchableOpacity>
+          <Text>{cardsRemaining} cards cards remaining</Text>
         </View>
       </View>
     );

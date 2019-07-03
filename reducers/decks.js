@@ -3,21 +3,26 @@ import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from "../types/decks";
 const decks = (state = {}, action) => {
   switch (action.type) {
     case ADD_CARD:
-      const { card, deckId } = action;
+      const { card, id } = action;
+
+      console.log(`ID: ${id}`);
 
       return {
         ...state,
-        [deckId]: {
-          ...state[deckId],
-          questions: state[deckId].questions.concat([card])
+        [id]: {
+          ...state[id],
+          questions: state[id].questions.concat([card])
         }
       };
     case ADD_DECK:
-      const { deck } = action;
+      const { deckTitle } = action;
 
       return {
         ...state,
-        [deck.id]: deck
+        [deckTitle]: {
+          title: deckTitle,
+          questions: []
+        }
       };
     case RECEIVE_DECKS:
       return {

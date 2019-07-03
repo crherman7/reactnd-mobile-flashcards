@@ -1,42 +1,52 @@
 import React from "react";
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, AsyncStorage } from "react-native";
 import DeckList from "./components/DeckList/DeckList";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import Card from "./components/Card/Card";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducers";
+import middleware from "./middleware";
+import NewDeck from "./components/NewDeck/NewDeck";
 import Deck from "./components/Deck/Deck";
 import NewCard from "./components/NewCard/NewCard";
-import NewDeck from "./components/NewDeck/NewDeck";
-import DeckListItem from "./components/DeckList/DeckListItem";
+import Quiz from "./components/Quiz/Quiz";
+
+const store = createStore(reducer, middleware);
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <StatusBar hidden={true} />
-        <AppNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <StatusBar hidden={true} />
+          <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }
 
-const AppNavigator = createAppContainer(
-  createStackNavigator(
-    {
-      Home: {
-        screen: DeckList,
-        navigationOptions: () => ({
-          title: "Decks",
-          headerStyle: {
-            backgroundColor: "#4D88EF"
-          }
-        })
-      },
-      FlashCard: {
-        screen: DeckList
-      }
+const Navigator = createStackNavigator(
+  {
+    DeckList: {
+      screen: DeckList
     },
-    {
-      initialRouteName: "FlashCard"
+    NewDeck: {
+      screen: NewDeck
+    },
+    Deck: {
+      screen: Deck
+    },
+    NewCard: {
+      screen: NewCard
+    },
+    Quiz: {
+      screen: Quiz
     }
-  )
+  },
+  {
+    initialRouteName: "DeckList"
+  }
 );
+
+const AppNavigator = createAppContainer(Navigator);

@@ -81,6 +81,7 @@ RNTester/Pods/
 
 # Expo
 .expo
+.expo-shared
 
 # Node
 node_modules

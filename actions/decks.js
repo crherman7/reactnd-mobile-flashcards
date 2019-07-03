@@ -1,20 +1,19 @@
 import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from "../types/decks";
 import { showLoading, hideLoading } from "react-redux-loading";
-import { getDecks } from "../utils/api";
+import { saveCard, getDecks, saveDeck } from "../utils/api";
 
-const addCard = (card, deckId) => {
+const addCard = (card, id) => {
   return {
     type: ADD_CARD,
-    //card = {question: "", answer: ""}
     card,
-    deckId
+    id
   };
 };
 
-const addDeck = deck => {
+const addDeck = deckTitle => {
   return {
     type: ADD_DECK,
-    deck
+    deckTitle
   };
 };
 
@@ -25,21 +24,21 @@ export const receiveDecks = decks => {
   };
 };
 
-export const handleAddCard = (card, deckId) => {
+export const handleAddCard = (card, id) => {
   return dispatch => {
     dispatch(showLoading());
-    return saveCard(card, deckId).then(() => {
-      dispatch(addCard(card, deckId));
+    return saveCard(card, id).then(() => {
+      dispatch(addCard(card, id));
       dispatch(hideLoading());
     });
   };
 };
 
-export const handleAddDeck = deck => {
+export const handleAddDeck = deckTitle => {
   return dispatch => {
     dispatch(showLoading());
-    return saveDeck(deck).then(() => {
-      dispatch(addDeck(deck));
+    return saveDeck(deckTitle).then(() => {
+      dispatch(addDeck(deckTitle));
       dispatch(hideLoading());
     });
   };

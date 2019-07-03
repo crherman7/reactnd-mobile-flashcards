@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./NewCardStyle";
+import { connect } from "react-redux";
+import { handleAddCard } from "../../actions/decks";
 
 class NewCard extends Component {
   state = {
@@ -11,8 +13,16 @@ class NewCard extends Component {
 
   submitClicked = () => {
     const { question, answer } = this.state;
+    const { dispatch } = this.props;
+    const { navigate } = this.props.navigation;
+    const { id } = this.props.navigation.state.params;
 
-    alert(`New card question: ${question}, answer: ${answer}`);
+    const card = {
+      question,
+      answer
+    };
+    dispatch(handleAddCard(card, id));
+    navigate("Deck", { id });
   };
 
   render() {
@@ -44,4 +54,4 @@ class NewCard extends Component {
   }
 }
 
-export default NewCard;
+export default connect()(NewCard);

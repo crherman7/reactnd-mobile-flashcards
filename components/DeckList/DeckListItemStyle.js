@@ -10,6 +10,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "70%",
     height: 75
+  },
+  titleContainer: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center"
+  },
+  titleText: {
+    fontSize: 6,
+    fontWeight: "bold"
   }
 });
 

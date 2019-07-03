@@ -1,34 +1,44 @@
 import { AsyncStorage } from "react-native";
 
-export const saveCard = (card, deckId) => {
-  getDecks().then(decks => {
-    const updatedDeck = {
-      ...decks,
-      [deckId]: {
-        ...decks[deckId],
-        questions: decks[deckId].questions.concat([card])
+export const saveCard = async (card, id) => {
+  const state = await AsyncStorage.getItem("DECKS")
+    .then(decks => {
+      return JSON.parse(decks);
+    })
+    .catch(error => {
+      console.log("Error: ", error);
+    });
+  await AsyncStorage.mergeItem(
+    "DECKS",
+    JSON.stringify({
+      [id]: {
+        ...state[id],
+        questions: state[id].questions.concat([card])
       }
-    };
-    await AsyncStorage.setItem("DECKS", JSON.stringify(updatedDeck))
+    })
+  ).catch(error => {
+    console.log("Error: ", error);
   });
 };
 
-export const saveDeck = deck => {
-    getDecks().then(decks => {
-        const updatedDecks = {
-            ...decks,
-            [deck.id]: deck
-        }
-        await AsyncStorage.setItem("DECKS", JSON.stringify(updatedDecks))
+export const saveDeck = async deckTitle => {
+  return await AsyncStorage.mergeItem(
+    "DECKS",
+    JSON.stringify({
+      [deckTitle]: {
+        title: deckTitle,
+        questions: []
+      }
     })
+  );
 };
 
 export const getDecks = async () => {
-  return await AsyncStorage.getItem("DECKS").then(decks => {
-    if (decks !== null) {
+  return await AsyncStorage.getItem("DECKS")
+    .then(decks => {
       return JSON.parse(decks);
-    } else {
-      return {};
-    }
-  });
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };

@@ -3,50 +3,44 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./DeckListStyle";
 import DeckListItem from "./DeckListItem";
 import { ScrollView } from "react-native-gesture-handler";
+import { connect } from "react-redux";
+import { handleReceiveDecks } from "../../actions/decks";
+import { isEmpty } from "lodash";
 
 class DeckList extends Component {
-  addDeckClick = () => {
-    alert("Clicked button!");
+  componentDidMount = () => {
+    const { dispatch } = this.props;
+
+    dispatch(handleReceiveDecks());
   };
+
   render() {
-    // const { decks } = this.props;
-    const decks = {
-      React: {
-        title: "React",
-        questions: [
-          {
-            question: "What is React?",
-            answer: "A library for managing user interfaces"
-          },
-          {
-            question: "Where do you make Ajax requests in React?",
-            answer: "The componentDidMount lifecycle event"
-          }
-        ]
-      }
-    };
+    const { decks, navigate } = this.props;
+
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.listContainer}
           contentContainerStyle={styles.center}
         >
-          {decks ? (
+          {isEmpty(decks) ? (
+            <Text>You have no decks! Please Add a deck!</Text>
+          ) : (
             Object.entries(decks).map(([key, value]) => (
               <DeckListItem
                 key={key}
+                id={key}
                 title={value.title}
                 numberOfCards={value.questions.length}
+                navigate={navigate}
               />
             ))
-          ) : (
-            <Text>You have no decks! Please Add a deck!</Text>
           )}
         </ScrollView>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.addDeckButton}
-            onPress={this.addDeckClick}
+            onPress={() => navigate("NewDeck")}
           >
             <Text>Add a Deck</Text>
           </TouchableOpacity>
@@ -56,4 +50,13 @@ class DeckList extends Component {
   }
 }
 
-export default DeckList;
+mapStateToProps = ({ decks }, props) => {
+  const { navigate } = props.navigation;
+
+  return {
+    decks,
+    navigate
+  };
+};
+
+export default connect(mapStateToProps)(DeckList);
